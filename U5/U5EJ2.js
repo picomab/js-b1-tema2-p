@@ -33,9 +33,54 @@
 */
 //Escribe aquí tu solución / escriviu aquí la vostra solució:
 
+class Car {
+  constructor(brand, model, displacement, horsePower, year) {
+    this.brand = brand;
+    this.model = model;
+    this.displacement = displacement;
+    this.horsePower = horsePower;
+    this.year = year;
+  }
+  // setter
+  set carAntiguaty (anysAntiguitat) {
+    this.year = (2023-anysAntiguitat);
+   }
+   // getter
+  get getCarDescription() {
+    return `${this.brand} ${this.model} ${this.displacement}cc`; 
+  } 
+  // mètodes de classe
+  static compareAntiguaty (vehicle1, vehicle2){ 
+	if(vehicle1.year<vehicle2.year){
+		return vehicle1
+	} else {
+		return vehicle2;
+	}
+  }
+  static maxDisplacement (vehiclesArray){ 
+	let vehicleMaxCilindrada = vehiclesArray[0];
+	for (let i=1; i<vehiclesArray.length; i++){
+		if(vehiclesArray[i].displacement > vehicleMaxCilindrada){
+			vehicleMaxCilindrada = vehiclesArray[i];
+		}
+	}
+	return vehicleMaxCilindrada;
+  }
+  // mètode d'instància
+  cv2kw() { 
+	return this.horsePower * 0.736;
+  }
+}
 
+// objectes de la classe Car
+const myCar1 = new Car("Ford", "Mustang Boss 429", 7000, 375, 1969);
+const myCar2 = new Car("BMW", "520d", 1980, 136, 2002);
+const myCar3 = new Car("Mercedes-Benz", "280 SLC", 2746, 136, 1979);
 
-
+// crides als mètodes
+const vehicleMesAntic = Car.compareAntiguaty (myCar1, myCar3);
+const vehicleMajorCilindrada = Car.maxDisplacement ([myCar1, myCar2, myCar3]);
+const kWFordMustang = myCar1.cv2kw() + "KW";
 
 
 /**

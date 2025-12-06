@@ -39,8 +39,71 @@
 */
 //Escribe aquí tu solución / escriviu aquí la vostra solució:
 
+class Triangle {
+  constructor(base, height, rightTriangle) {
+    this.base = base;
+    this.height = height;
+    this.rightTriangle = rightTriangle;
+  }
+  // getters
+  get areaTriangle () {
+    return (this.base*this.height)/2;
+  }
+  get rightHypotenuse () {
+    if (this.rightTriangle) {
+      let sumaQuadrats = square(this.base) + square(this.height);
+      function square (nombre) {
+        return nombre*nombre;
+        }
+      return Math.sqrt(sumaQuadrats);
+      } else {
+      return undefined;
+    }
+  }
+  get rightPerimeter () {
+    if (this.rightTriangle) {
+    return this.base + this.height + this.rightHypotenuse;
+    } else {
+      return undefined;
+    }
+  }
+  // mètodes classe
+  static rightTriangleUnion (triangle1, triangle2) {
+		if (!triangle1.rightTriangle || !triangle2.rightTriangle) {
+			return "No són triangles rectangles";
+		}
+		const perimetre1 = triangle1.rightPerimeter; 
+		const perimetre2 = triangle2.rightPerimeter;
+		const diferenciaAlcada = Math.abs(triangle1.height - triangle2.height); // Math.abs 
+		return perimetre1 + perimetre2 + diferenciaAlcada;
+  }
+  static areaPoligon (arrayTriangles) {
+	let resultat = 0;
+	for (let i = 0; i<arrayTriangles.length; i++) {
+		resultat = resultat + arrayTriangles[i].areaTriangle;
+	}
+	return resultat;
+  }
 
+  // mètode instància
+  isEquilateral () {
+	if (this.height = this.base*(Math.sqrt(3)/2)){
+		return true;
+	} else {
+		return false;
+	}
+  }
+}
 
+// objectes de la classe Triangle
+const triangle1 = new Triangle (40, 20, true);
+const triangle2 = new Triangle (12, 45, false);
+const triangle3 = new Triangle (32, 16, true);
+
+// crides als mètodes
+const perimetreNouPoligon = Triangle.rightTriangleUnion (triangle1, triangle3);
+const areaNouPoligon = Triangle.areaPoligon([triangle1, triangle2, triangle3]);
+const esEquilater = triangle1.isEquilateral();
 
 
 
